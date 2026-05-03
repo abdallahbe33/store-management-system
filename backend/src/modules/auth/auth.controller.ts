@@ -31,3 +31,10 @@ export const getMe = asyncHandler(async (req: Request, res: Response) => {
     user: req.user,
   });
 });
+// Define the adminTest controller function
+export const adminTest = asyncHandler(async (req: Request, res: Response) => {
+  res.status(200).json({
+    status: "success",
+    message: "You are an admin",
+  });
+});
