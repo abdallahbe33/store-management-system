@@ -1,9 +1,10 @@
 import express from "express";
-
+import authRoutes from "./modules/auth/auth.routes";
+import prisma from "./db/prisma";
+import errorMiddleware from "./middleware/error.middleware";
+// Initialize Express app 
 const app = express();
-
 app.use(express.json());
-
 app.get("/api/health", (req, res) => {
   res.status(200).json({
     status: "ok",
@@ -11,5 +12,19 @@ app.get("/api/health", (req, res) => {
   });
 });
 
+// Test route to check database connection
+app.get("/api/db-test", async (req, res) => {
+  const users = await prisma.user.findMany();
+
+  res.status(200).json({
+    status: "ok",
+    users,
+  });
+});
+
+// Register auth routes
+app.use("/api/auth", authRoutes);
+// Use error handling middleware
+app.use(errorMiddleware);
 
 export default app;
