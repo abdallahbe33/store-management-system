@@ -10,5 +10,10 @@ app.get("/api/health", (req, res) => {
     message: "Store Management API is running",
   });
 });
+app.get("/api/test", (req, res) => {
+  res.status(200).json({
+    message: "Test route works",
+  });
+});
 
 export default app;
