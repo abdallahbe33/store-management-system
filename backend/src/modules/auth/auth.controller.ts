@@ -24,3 +24,10 @@ export const login = asyncHandler(async (req: Request, res: Response) => {
     user: result.user,
   });
 });
+// Define the getMe controller function
+export const getMe = asyncHandler(async (req: Request, res: Response) => {
+  res.status(200).json({
+    status: "success",
+    user: req.user,
+  });
+});
