@@ -7,11 +7,12 @@ import supplierRoutes from "./modules/suppliers/supplier.routes";
 import productRoutes from "./modules/products/product.routes";
 import stockRoutes from "./modules/stock/stock.routes";
 import orderRoutes from "./modules/orders/order.routes";
-// Initialize Express app 
+import dashboardRoutes from "./modules/dashboard/dashboard.routes";
+// Initialize  Express app 
 const app = express();
 app.use(express.json());
 app.get("/api/health", (req, res) => {
-  res.status(200).json({
+  res.status(200).json({    
     status: "ok",
     message: "Store Management API is running",
   });
@@ -41,4 +42,7 @@ app.use("/api/products", productRoutes);
 app.use("/api/stock", stockRoutes); 
 // Register order routes
 app.use("/api/orders", orderRoutes);
+// Register dashboard routes
+app.use("/api/dashboard", dashboardRoutes);
+
 export default app;
