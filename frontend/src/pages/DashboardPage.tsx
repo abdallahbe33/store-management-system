@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
-
+import { Link } from "react-router-dom";
 type DashboardSummary = {
   totalProducts: number;
   totalCategories: number;
@@ -64,6 +64,7 @@ function DashboardPage() {
     <div style={{ maxWidth: "900px", margin: "40px auto", fontFamily: "Arial" }}>
       <h1>Dashboard</h1>
       <p>Welcome to the Store Management System.</p>
+      <p><Link to="/products">View Products</Link></p>
 
       <div
         style={{
