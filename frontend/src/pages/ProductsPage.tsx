@@ -28,6 +28,7 @@ function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [pagination, setPagination] = useState<Pagination | null>(null);
   const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -38,7 +39,7 @@ function ProductsPage() {
 
       const response = await api.get("/products", {
         params: {
-          page: 1,
+          page,
           limit: 10,
           search: search || undefined,
         },
@@ -55,12 +56,17 @@ function ProductsPage() {
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [page]);
 
   const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    fetchProducts();
-  };
+
+    if (page !== 1) {
+        setPage(1);
+    } else {
+        fetchProducts();
+    }
+    };
 
   return (
     <div style={{ maxWidth: "1100px", margin: "40px auto", fontFamily: "Arial" }}>
@@ -122,11 +128,27 @@ function ProductsPage() {
           </table>
 
           {pagination && (
-            <p style={{ marginTop: "16px" }}>
-              Page {pagination.page} of {pagination.totalPages} — Total products:{" "}
-              {pagination.totalItems}
-            </p>
-          )}
+  <div style={{ marginTop: "16px", display: "flex", gap: "12px", alignItems: "center" }}>
+    <button
+      disabled={pagination.page <= 1}
+      onClick={() => setPage((currentPage) => currentPage - 1)}
+    >
+      Previous
+    </button>
+
+    <span>
+      Page {pagination.page} of {pagination.totalPages} — Total products:{" "}
+      {pagination.totalItems}
+    </span>
+
+    <button
+      disabled={pagination.page >= pagination.totalPages}
+      onClick={() => setPage((currentPage) => currentPage + 1)}
+    >
+      Next
+    </button>
+  </div>
+)}
         </>
       )}
     </div>

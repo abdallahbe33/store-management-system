@@ -68,6 +68,27 @@ function SuppliersPage() {
     }
   };
 
+  const handleDeleteSupplier = async (id: string) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this supplier?"
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    try {
+      setMessage("");
+
+      await api.delete(`/suppliers/${id}`);
+
+      await fetchSuppliers();
+      setMessage("Supplier deleted successfully");
+    } catch (error: any) {
+      setMessage(error.response?.data?.message || "Failed to delete supplier");
+    }
+  };
+
   return (
     <div style={{ maxWidth: "1000px", margin: "40px auto", fontFamily: "Arial" }}>
       <h1>Suppliers</h1>
@@ -131,6 +152,7 @@ function SuppliersPage() {
               <th style={thStyle}>Phone</th>
               <th style={thStyle}>Address</th>
               <th style={thStyle}>Created At</th>
+              <th style={thStyle}>Actions</th>
             </tr>
           </thead>
 
@@ -143,6 +165,14 @@ function SuppliersPage() {
                 <td style={tdStyle}>{supplier.address || "-"}</td>
                 <td style={tdStyle}>
                   {new Date(supplier.createdAt).toLocaleString()}
+                </td>
+                <td style={tdStyle}>
+                  <button
+                    onClick={() => handleDeleteSupplier(supplier.id)}
+                    style={{ color: "red" }}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
