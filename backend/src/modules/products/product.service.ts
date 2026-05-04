@@ -69,6 +69,8 @@ export const getAllProducts = async (query: {
   categoryId?: string;
   supplierId?: string;
   lowStock?: string;
+  page?: string;
+  limit?: string;
 }) => {
   const where: Prisma.ProductWhereInput = {};
 
@@ -97,8 +99,14 @@ export const getAllProducts = async (query: {
     where.supplierId = query.supplierId;
   }
 
+  const page = Math.max(Number(query.page) || 1, 1);
+  const limit = Math.min(Math.max(Number(query.limit) || 10, 1), 100);
+  const skip = (page - 1) * limit;
+
   const products = await prisma.product.findMany({
     where,
+    skip,
+    take: limit,
     orderBy: {
       createdAt: "desc",
     },
@@ -108,11 +116,27 @@ export const getAllProducts = async (query: {
     },
   });
 
+  const totalItems = await prisma.product.count({
+    where,
+  });
+
+  let filteredProducts = products;
+
   if (query.lowStock === "true") {
-    return products.filter((product) => product.quantity <= product.minStock);
+    filteredProducts = products.filter(
+      (product) => product.quantity <= product.minStock
+    );
   }
 
-  return products;
+  return {
+    products: filteredProducts,
+    pagination: {
+      page,
+      limit,
+      totalItems,
+      totalPages: Math.ceil(totalItems / limit),
+    },
+  };
 };
 
 export const getProductById = async (id: string) => {

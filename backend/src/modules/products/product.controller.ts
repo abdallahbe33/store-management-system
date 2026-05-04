@@ -37,21 +37,23 @@ export const createProductController = asyncHandler(
 
 export const getAllProductsController = asyncHandler(
   async (req: Request, res: Response) => {
-    const products = await getAllProducts({
+    const result = await getAllProducts({
       search: req.query.search as string | undefined,
       categoryId: req.query.categoryId as string | undefined,
       supplierId: req.query.supplierId as string | undefined,
       lowStock: req.query.lowStock as string | undefined,
+      page: req.query.page as string | undefined,
+      limit: req.query.limit as string | undefined,
     });
 
     res.status(200).json({
       status: "success",
-      results: products.length,
-      products,
+      results: result.products.length,
+      pagination: result.pagination,
+      products: result.products,
     });
   }
 );
-
 export const getProductByIdController = asyncHandler(
   async (req: Request, res: Response) => {
     const product = await getProductById(getIdParam(req));
