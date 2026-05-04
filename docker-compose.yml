@@ -1,0 +1,31 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: store_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: store_user
+      POSTGRES_PASSWORD: store_password
+      POSTGRES_DB: store_management
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend
+    container_name: store_backend
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      PORT: 3000
+      DATABASE_URL: postgresql://store_user:store_password@postgres:5432/store_management
+      JWT_SECRET: docker_jwt_secret_change_later
+      CLIENT_URL: http://localhost:5173
+    ports:
+      - "3000:3000"
+
+volumes:
+  postgres_data:
