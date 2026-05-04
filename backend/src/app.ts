@@ -4,6 +4,7 @@ import prisma from "./db/prisma";
 import errorMiddleware from "./middleware/error.middleware";
 import categoryRoutes from "./modules/categories/category.routes";
 import supplierRoutes from "./modules/suppliers/supplier.routes";
+import productRoutes from "./modules/products/product.routes";
 // Initialize Express app 
 const app = express();
 app.use(express.json());
@@ -32,4 +33,6 @@ app.use(errorMiddleware);
 app.use("/api/categories", categoryRoutes);
 // Register supplier routes
 app.use("/api/suppliers", supplierRoutes);
+// Register product routes
+app.use("/api/products", productRoutes);
 export default app;
