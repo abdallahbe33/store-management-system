@@ -26,6 +26,7 @@ model User {
   passwordHash String
   role         Role     @default(WORKER)
   stockMovements StockMovement[]
+  orders Order[]
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
@@ -65,7 +66,9 @@ model Product {
   category   Category @relation(fields: [categoryId], references: [id])
   supplier   Supplier? @relation(fields: [supplierId], references: [id])
 
+  orderItems OrderItem[]
   stockMovements StockMovement[]
+
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
@@ -81,4 +84,37 @@ model StockMovement {
 
   product Product @relation(fields: [productId], references: [id])
   user    User    @relation(fields: [userId], references: [id])
+}
+
+enum OrderStatus {
+  PENDING
+  APPROVED
+  SHIPPED
+  CANCELLED
+}
+
+model Order {
+  id           String      @id @default(uuid())
+  customerName String
+  status       OrderStatus @default(PENDING)
+  totalPrice   Decimal     @default(0)
+
+  createdById String
+  createdBy   User        @relation(fields: [createdById], references: [id])
+
+  items     OrderItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model OrderItem {
+  id        String  @id @default(uuid())
+  orderId   String
+  productId String
+  quantity  Int
+  unitPrice Decimal
+
+  order   Order   @relation(fields: [orderId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
 }
