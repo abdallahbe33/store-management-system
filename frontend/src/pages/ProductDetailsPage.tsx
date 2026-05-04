@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import api from "../api/axios";
 
 type Product = {
@@ -27,6 +27,7 @@ type Product = {
 
 function ProductDetailsPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [product, setProduct] = useState<Product | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -39,7 +40,6 @@ function ProductDetailsPage() {
         setErrorMessage("");
 
         const response = await api.get(`/products/${id}`);
-
         setProduct(response.data.product);
       } catch (error: any) {
         setErrorMessage(error.response?.data?.message || "Failed to load product");
@@ -50,6 +50,23 @@ function ProductDetailsPage() {
 
     fetchProduct();
   }, [id]);
+
+  const handleDelete = async () => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this product?"
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    try {
+      await api.delete(`/products/${id}`);
+      navigate("/products");
+    } catch (error: any) {
+      setErrorMessage(error.response?.data?.message || "Failed to delete product");
+    }
+  };
 
   if (isLoading) {
     return (
@@ -87,7 +104,15 @@ function ProductDetailsPage() {
       </p>
 
       <h1>{product.name}</h1>
-      <p><Link to={`/products/${product.id}/edit`}>Edit Product</Link></p>
+
+      <p>
+        <Link to={`/products/${product.id}/edit`}>Edit Product</Link>
+      </p>
+
+      <button onClick={handleDelete} style={{ color: "red", marginBottom: "16px" }}>
+        Delete Product
+      </button>
+
       <div style={cardStyle}>
         <p>
           <strong>SKU:</strong> {product.sku}
