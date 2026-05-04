@@ -54,6 +54,27 @@ function CategoriesPage() {
     }
   };
 
+  const handleDeleteCategory = async (id: string) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this category?"
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    try {
+      setMessage("");
+
+      await api.delete(`/categories/${id}`);
+
+      await fetchCategories();
+      setMessage("Category deleted successfully");
+    } catch (error: any) {
+      setMessage(error.response?.data?.message || "Failed to delete category");
+    }
+  };
+
   return (
     <div style={{ maxWidth: "900px", margin: "40px auto", fontFamily: "Arial" }}>
       <h1>Categories</h1>
@@ -82,6 +103,7 @@ function CategoriesPage() {
             <tr>
               <th style={thStyle}>Name</th>
               <th style={thStyle}>Created At</th>
+              <th style={thStyle}>Actions</th>
             </tr>
           </thead>
 
@@ -91,6 +113,14 @@ function CategoriesPage() {
                 <td style={tdStyle}>{category.name}</td>
                 <td style={tdStyle}>
                   {new Date(category.createdAt).toLocaleString()}
+                </td>
+                <td style={tdStyle}>
+                  <button
+                    onClick={() => handleDeleteCategory(category.id)}
+                    style={{ color: "red" }}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
