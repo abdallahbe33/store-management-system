@@ -15,10 +15,7 @@ function DashboardPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    window.location.href = "/login";
-  };
+  
 
   useEffect(() => {
     const fetchSummary = async () => {
@@ -55,7 +52,7 @@ function DashboardPage() {
       <div style={{ maxWidth: "900px", margin: "40px auto", fontFamily: "Arial" }}>
         <h1>Dashboard</h1>
         <p style={{ color: "red" }}>{errorMessage}</p>
-        <button onClick={handleLogout}>Logout</button>
+       
       </div>
     );
   }
@@ -106,7 +103,7 @@ function DashboardPage() {
         </div>
       </div>
 
-      <button onClick={handleLogout}>Logout</button>
+     
     </div>
   );
 }
