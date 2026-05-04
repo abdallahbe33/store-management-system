@@ -26,6 +26,7 @@ function AppLayout() {
           <Link to="/dashboard">Dashboard</Link>
           <Link to="/products">Products</Link>
           <Link to="/products/new">Create Product</Link>
+          <Link to="/categories">Categories</Link>
           <button onClick={handleLogout}>Logout</button>
         </div>
       </nav>
