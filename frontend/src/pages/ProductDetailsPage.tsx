@@ -87,7 +87,7 @@ function ProductDetailsPage() {
       </p>
 
       <h1>{product.name}</h1>
-
+      <p><Link to={`/products/${product.id}/edit`}>Edit Product</Link></p>
       <div style={cardStyle}>
         <p>
           <strong>SKU:</strong> {product.sku}
