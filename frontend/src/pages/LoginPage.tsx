@@ -1,7 +1,9 @@
 import { FormEvent, useState } from "react";
 import api from "../api/axios";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("admin@example.com");
   const [password, setPassword] = useState("123456");
   const [message, setMessage] = useState("");
@@ -20,6 +22,7 @@ function LoginPage() {
       });
 
       localStorage.setItem("token", response.data.token);
+      navigate("/dashboard");
 
       setMessage("Login successful");
     } catch (error: any) {
