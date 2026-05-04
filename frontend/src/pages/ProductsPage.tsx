@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
-
+import { Link } from "react-router-dom";
 type Product = {
   id: string;
   name: string;
@@ -65,6 +65,7 @@ function ProductsPage() {
   return (
     <div style={{ maxWidth: "1100px", margin: "40px auto", fontFamily: "Arial" }}>
       <h1>Products</h1>
+      <p><Link to="/products/new">Create New Product</Link></p>
 
       <form onSubmit={handleSearch} style={{ marginBottom: "20px" }}>
         <input
