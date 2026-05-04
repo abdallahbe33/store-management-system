@@ -8,8 +8,33 @@ import productRoutes from "./modules/products/product.routes";
 import stockRoutes from "./modules/stock/stock.routes";
 import orderRoutes from "./modules/orders/order.routes";
 import dashboardRoutes from "./modules/dashboard/dashboard.routes";
+import helmet from "helmet";
+import cors from "cors";
+import rateLimit from "express-rate-limit";
+
+
 // Initialize  Express app 
 const app = express();
+// Use security middleware
+app.use(helmet());
+
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    credentials: true,
+  })
+);
+
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 300,
+  message: {
+    status: "error",
+    message: "Too many requests, please try again later",
+  },
+});
+
+app.use("/api", apiLimiter);
 app.use(express.json());
 app.get("/api/health", (req, res) => {
   res.status(200).json({    
