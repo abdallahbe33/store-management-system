@@ -6,7 +6,7 @@ import CreateProductPage from "./pages/CreateProductPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AppLayout from "./layouts/AppLayout";
 import CategoriesPage from "./pages/CategoriesPage";
-
+import SuppliersPage from "./pages/SuppliersPage";
 function App() {
   return (
     <BrowserRouter>
@@ -26,6 +26,7 @@ function App() {
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/products/new" element={<CreateProductPage />} />
           <Route path="/categories" element={<CategoriesPage />} />
+          <Route path="/suppliers" element={<SuppliersPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
