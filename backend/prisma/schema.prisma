@@ -12,6 +12,12 @@ enum Role {
   MANAGER
   WORKER
 }
+enum StockMovementType {
+  IN
+  OUT
+  ADJUSTMENT
+  RETURN
+}
 
 model User {
   id           String   @id @default(uuid())
@@ -19,6 +25,7 @@ model User {
   email        String   @unique
   passwordHash String
   role         Role     @default(WORKER)
+  stockMovements StockMovement[]
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
@@ -41,6 +48,8 @@ model Supplier {
   updatedAt DateTime  @updatedAt
 }
 
+
+
 model Product {
   id          String   @id @default(uuid())
   name        String
@@ -56,6 +65,20 @@ model Product {
   category   Category @relation(fields: [categoryId], references: [id])
   supplier   Supplier? @relation(fields: [supplierId], references: [id])
 
+  stockMovements StockMovement[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model StockMovement {
+  id        String            @id @default(uuid())
+  productId String
+  userId    String
+  type      StockMovementType
+  quantity  Int
+  note      String?
+  createdAt DateTime          @default(now())
+
+  product Product @relation(fields: [productId], references: [id])
+  user    User    @relation(fields: [userId], references: [id])
 }

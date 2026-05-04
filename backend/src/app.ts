@@ -5,6 +5,7 @@ import errorMiddleware from "./middleware/error.middleware";
 import categoryRoutes from "./modules/categories/category.routes";
 import supplierRoutes from "./modules/suppliers/supplier.routes";
 import productRoutes from "./modules/products/product.routes";
+import stockRoutes from "./modules/stock/stock.routes";
 // Initialize Express app 
 const app = express();
 app.use(express.json());
@@ -35,4 +36,6 @@ app.use("/api/categories", categoryRoutes);
 app.use("/api/suppliers", supplierRoutes);
 // Register product routes
 app.use("/api/products", productRoutes);
+// Register stock routes
+app.use("/api/stock", stockRoutes); 
 export default app;
