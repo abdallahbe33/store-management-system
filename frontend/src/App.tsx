@@ -8,6 +8,7 @@ import AppLayout from "./layouts/AppLayout";
 import CategoriesPage from "./pages/CategoriesPage";
 import SuppliersPage from "./pages/SuppliersPage";
 import OrdersPage from "./pages/OrdersPage";
+import StockPage from "./pages/StockPage";
 function App() {
   return (
     <BrowserRouter>
@@ -29,6 +30,7 @@ function App() {
           <Route path="/categories" element={<CategoriesPage />} />
           <Route path="/suppliers" element={<SuppliersPage />} />
           <Route path="/orders" element={<OrdersPage />} />
+          <Route path="/stock" element={<StockPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
