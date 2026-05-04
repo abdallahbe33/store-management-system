@@ -30,6 +30,7 @@ function AppLayout() {
             <Link to="/suppliers">Suppliers</Link>
             <Link to="/orders">Orders</Link>
             <Link to="/stock">Stock</Link>
+            
           <button onClick={handleLogout}>Logout</button>
         </div>
       </nav>

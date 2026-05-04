@@ -9,6 +9,7 @@ import CategoriesPage from "./pages/CategoriesPage";
 import SuppliersPage from "./pages/SuppliersPage";
 import OrdersPage from "./pages/OrdersPage";
 import StockPage from "./pages/StockPage";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
 function App() {
   return (
     <BrowserRouter>
@@ -31,6 +32,7 @@ function App() {
           <Route path="/suppliers" element={<SuppliersPage />} />
           <Route path="/orders" element={<OrdersPage />} />
           <Route path="/stock" element={<StockPage />} />
+          <Route path="/products/:id" element={<ProductDetailsPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -99,6 +99,7 @@ function ProductsPage() {
                 <th style={thStyle}>Min Stock</th>
                 <th style={thStyle}>Category</th>
                 <th style={thStyle}>Supplier</th>
+                <th style={thStyle}>Actions</th>
               </tr>
             </thead>
 
@@ -112,6 +113,9 @@ function ProductsPage() {
                   <td style={tdStyle}>{product.minStock}</td>
                   <td style={tdStyle}>{product.category?.name}</td>
                   <td style={tdStyle}>{product.supplier?.name || "-"}</td>
+                  <td style={tdStyle}>
+                        <Link to={`/products/${product.id}`}>View</Link>
+                  </td>
                 </tr>
               ))}
             </tbody>
