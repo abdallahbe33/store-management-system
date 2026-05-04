@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
-
+import { inputStyle, tdStyle, thStyle } from "../utils/styles";
 type Product = {
   id: string;
   name: string;
@@ -213,20 +213,6 @@ function OrdersPage() {
   );
 }
 
-const inputStyle: React.CSSProperties = {
-  padding: "8px",
-};
 
-const thStyle: React.CSSProperties = {
-  border: "1px solid #ddd",
-  padding: "10px",
-  backgroundColor: "#f2f2f2",
-  textAlign: "left",
-};
-
-const tdStyle: React.CSSProperties = {
-  border: "1px solid #ddd",
-  padding: "10px",
-};
 
 export default OrdersPage;

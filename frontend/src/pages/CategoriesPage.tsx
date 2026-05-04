@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
+import { tdStyle, thStyle } from "../utils/styles";
 
 type Category = {
   id: string;
@@ -131,16 +132,5 @@ function CategoriesPage() {
   );
 }
 
-const thStyle: React.CSSProperties = {
-  border: "1px solid #ddd",
-  padding: "10px",
-  backgroundColor: "#f2f2f2",
-  textAlign: "left",
-};
-
-const tdStyle: React.CSSProperties = {
-  border: "1px solid #ddd",
-  padding: "10px",
-};
 
 export default CategoriesPage;

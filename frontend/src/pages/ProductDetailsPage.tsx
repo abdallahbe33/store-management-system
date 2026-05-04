@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import api from "../api/axios";
-
+import { cardStyle, pageStyle } from "../utils/styles";
 type Product = {
   id: string;
   name: string;
@@ -173,17 +173,6 @@ function ProductDetailsPage() {
   );
 }
 
-const pageStyle: React.CSSProperties = {
-  maxWidth: "800px",
-  margin: "40px auto",
-  fontFamily: "Arial",
-};
 
-const cardStyle: React.CSSProperties = {
-  border: "1px solid #ddd",
-  borderRadius: "8px",
-  padding: "20px",
-  backgroundColor: "#f9f9f9",
-};
 
 export default ProductDetailsPage;

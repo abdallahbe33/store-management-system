@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
-
+import { fieldStyle, fullWidthInputStyle, pageStyle } from "../utils/styles";
 type Category = {
   id: string;
   name: string;
@@ -73,7 +73,7 @@ function CreateProductPage() {
   };
 
   return (
-    <div style={{ maxWidth: "700px", margin: "40px auto", fontFamily: "Arial" }}>
+    <div style={pageStyle}>
       <h1>Create Product</h1>
 
       {message && <p style={{ color: "red" }}>{message}</p>}
@@ -81,12 +81,12 @@ function CreateProductPage() {
       <form onSubmit={handleSubmit}>
         <div style={fieldStyle}>
           <label>Name</label>
-          <input value={name} onChange={(e) => setName(e.target.value)} style={inputStyle} />
+          <input value={name} onChange={(e) => setName(e.target.value)} style={fullWidthInputStyle} />
         </div>
 
         <div style={fieldStyle}>
           <label>SKU</label>
-          <input value={sku} onChange={(e) => setSku(e.target.value)} style={inputStyle} />
+          <input value={sku} onChange={(e) => setSku(e.target.value)} style={fullWidthInputStyle} />
         </div>
 
         <div style={fieldStyle}>
@@ -94,7 +94,7 @@ function CreateProductPage() {
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            style={inputStyle}
+            style={fullWidthInputStyle}
           />
         </div>
 
@@ -105,7 +105,7 @@ function CreateProductPage() {
             step="0.01"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
-            style={inputStyle}
+            style={fullWidthInputStyle}
           />
         </div>
 
@@ -115,7 +115,7 @@ function CreateProductPage() {
             type="number"
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
-            style={inputStyle}
+            style={fullWidthInputStyle}
           />
         </div>
 
@@ -125,7 +125,7 @@ function CreateProductPage() {
             type="number"
             value={minStock}
             onChange={(e) => setMinStock(e.target.value)}
-            style={inputStyle}
+            style={fullWidthInputStyle}
           />
         </div>
 
@@ -134,7 +134,7 @@ function CreateProductPage() {
           <select
             value={categoryId}
             onChange={(e) => setCategoryId(e.target.value)}
-            style={inputStyle}
+            style={fullWidthInputStyle}
           >
             <option value="">Select category</option>
             {categories.map((category) => (
@@ -150,7 +150,7 @@ function CreateProductPage() {
           <select
             value={supplierId}
             onChange={(e) => setSupplierId(e.target.value)}
-            style={inputStyle}
+            style={fullWidthInputStyle}
           >
             <option value="">No supplier</option>
             {suppliers.map((supplier) => (
@@ -168,15 +168,4 @@ function CreateProductPage() {
     </div>
   );
 }
-
-const fieldStyle: React.CSSProperties = {
-  marginBottom: "14px",
-};
-
-const inputStyle: React.CSSProperties = {
-  width: "100%",
-  padding: "8px",
-  marginTop: "4px",
-};
-
 export default CreateProductPage;

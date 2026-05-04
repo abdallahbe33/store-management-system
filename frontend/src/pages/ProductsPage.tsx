@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
 import { Link } from "react-router-dom";
+import { tdStyle, thStyle } from "../utils/styles";
 type Product = {
   id: string;
   name: string;
@@ -155,16 +156,5 @@ function ProductsPage() {
   );
 }
 
-const thStyle: React.CSSProperties = {
-  border: "1px solid #ddd",
-  padding: "10px",
-  backgroundColor: "#f2f2f2",
-  textAlign: "left",
-};
-
-const tdStyle: React.CSSProperties = {
-  border: "1px solid #ddd",
-  padding: "10px",
-};
 
 export default ProductsPage;

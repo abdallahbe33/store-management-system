@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../api/axios";
-
+import {
+  cardStyle,
+  pageStyle,
+  tableStyle,
+  tdStyle,
+  thStyle,
+} from "../utils/styles";
 type DashboardSummary = {
   totalProducts: number;
   totalCategories: number;
@@ -252,38 +258,12 @@ function DashboardPage() {
   );
 }
 
-const pageStyle: React.CSSProperties = {
-  maxWidth: "1100px",
-  margin: "40px auto",
-  fontFamily: "Arial",
-};
 
-const cardStyle: React.CSSProperties = {
-  border: "1px solid #ddd",
-  borderRadius: "8px",
-  padding: "16px",
-  backgroundColor: "#f9f9f9",
-};
 
 const sectionStyle: React.CSSProperties = {
   marginTop: "32px",
 };
 
-const tableStyle: React.CSSProperties = {
-  width: "100%",
-  borderCollapse: "collapse",
-};
 
-const thStyle: React.CSSProperties = {
-  border: "1px solid #ddd",
-  padding: "10px",
-  backgroundColor: "#f2f2f2",
-  textAlign: "left",
-};
-
-const tdStyle: React.CSSProperties = {
-  border: "1px solid #ddd",
-  padding: "10px",
-};
 
 export default DashboardPage;

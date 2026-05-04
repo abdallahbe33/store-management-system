@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import api from "../api/axios";
+import { fieldStyle, fullWidthInputStyle, pageStyle } from "../utils/styles";
 
 type Category = {
   id: string;
@@ -116,12 +117,12 @@ function EditProductPage() {
       <form onSubmit={handleSubmit}>
         <div style={fieldStyle}>
           <label>Name</label>
-          <input value={name} onChange={(e) => setName(e.target.value)} style={inputStyle} />
+          <input value={name} onChange={(e) => setName(e.target.value)} style={fullWidthInputStyle} />
         </div>
 
         <div style={fieldStyle}>
           <label>SKU</label>
-          <input value={sku} onChange={(e) => setSku(e.target.value)} style={inputStyle} />
+          <input value={sku} onChange={(e) => setSku(e.target.value)} style={fullWidthInputStyle} />
         </div>
 
         <div style={fieldStyle}>
@@ -129,7 +130,7 @@ function EditProductPage() {
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            style={inputStyle}
+            style={fullWidthInputStyle}
           />
         </div>
 
@@ -140,7 +141,7 @@ function EditProductPage() {
             step="0.01"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
-            style={inputStyle}
+            style={fullWidthInputStyle}
           />
         </div>
 
@@ -150,7 +151,7 @@ function EditProductPage() {
             type="number"
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
-            style={inputStyle}
+            style={fullWidthInputStyle}
           />
         </div>
 
@@ -160,7 +161,7 @@ function EditProductPage() {
             type="number"
             value={minStock}
             onChange={(e) => setMinStock(e.target.value)}
-            style={inputStyle}
+            style={fullWidthInputStyle}
           />
         </div>
 
@@ -169,7 +170,7 @@ function EditProductPage() {
           <select
             value={categoryId}
             onChange={(e) => setCategoryId(e.target.value)}
-            style={inputStyle}
+            style={fullWidthInputStyle}
           >
             <option value="">Select category</option>
             {categories.map((category) => (
@@ -185,7 +186,7 @@ function EditProductPage() {
           <select
             value={supplierId}
             onChange={(e) => setSupplierId(e.target.value)}
-            style={inputStyle}
+            style={fullWidthInputStyle}
           >
             <option value="">No supplier</option>
             {suppliers.map((supplier) => (
@@ -204,20 +205,6 @@ function EditProductPage() {
   );
 }
 
-const pageStyle: React.CSSProperties = {
-  maxWidth: "700px",
-  margin: "40px auto",
-  fontFamily: "Arial",
-};
 
-const fieldStyle: React.CSSProperties = {
-  marginBottom: "14px",
-};
-
-const inputStyle: React.CSSProperties = {
-  width: "100%",
-  padding: "8px",
-  marginTop: "4px",
-};
 
 export default EditProductPage;
